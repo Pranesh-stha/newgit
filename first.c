@@ -6,12 +6,14 @@
 char category; //category of the conversion choice
 int tempChoice;
 int currencyChoice;
+int TimeChoice;
 int massChoice;
 int userinF; //farenheit input
 int userinC; //celcius input
 int farenToCel;
 int celToFaren;
 int towhich; //to convert to which currency
+int towhichT; //to convert to which time
 float userinputNrs; //nepali rupeess input
 float userinputUSD; //ameican dollar input
 float userinputEuro; //euro input
@@ -42,14 +44,16 @@ float KgToT;
 float PToTon;
 float TonToP;
 float TonToKg;
-
+float userinpday, userinphr, userinpmin, userinpsec;
+float daytohr, daytomin, daytosec, hrtoday, hrtomin, hrtosec, mintoday, mintohr, mintosec, sectoday, sectohr,sectomin;
+float formass[8] = {0,1000,0.001,2.2,0.4536,453.592,0.0022046};
 void categorychoose()
 {
     printf("HERE IS A LIST OF CONVERSION YOU CAN CHOOSE FROM\n");
-    printf("TEMPERATURE(T)\nMASS(M)\nCURRENCY(C)\n");
+    printf("TEMPERATURE(T)\nMASS(M)\nCURRENCY(C)\nTime(t)\n");
     printf("PLEASE ENTER THE LETTER YOU WANT TO CONVERT\n");
     printf("PLEASE ENTER X TO QUIT\n\n");
-    scanf("%c", &category);
+    scanf(" %c", &category);
 }
 
 void tempchange()
@@ -62,14 +66,26 @@ void tempchange()
     scanf("%d",&tempChoice);
 }
 
+void whichtime()
+{
+    printf("Welcome to Time Unit Converter! \n");
+    printf("Here is a list of conversations to choose from: \n");
+    printf("Enter 1 to convert from Day.\n");
+    printf("Enter 2 to convert from Hour.\n");
+    printf("Enter 3 to convert from Minute.\n");
+    printf("Enter 4 to convert from Second.\n");
+    printf("Enter 99 to go back\n");
+    scanf("%d",&TimeChoice);
+}
+
 void whichmoney()
 {
     printf("Welcome to Currency Converter! \n");
     printf("Here is a list of conversations to choose from: \n");
-    printf("Enter 1 for Nrs.\n");
-    printf("Enter 2 for INR.\n");
-    printf("Enter 3 for USD.\n");
-    printf("Enter 4 for Euro.\n");
+    printf("Enter 1 to convert from Nrs.\n");
+    printf("Enter 2 to convert from INR.\n");
+    printf("Enter 3 to convert from USD.\n");
+    printf("Enter 4 to convert from Euro.\n");
     printf("Enter 99 to go back\n");
     scanf("%d",&currencyChoice);
 }
@@ -90,6 +106,46 @@ void masschange()
     printf("Enter 10 for Ton to Pound. \n");
     printf("Enter 99 to go back. \n");
     scanf("%d",&massChoice);
+}
+
+void day()
+{
+    printf("Enter 1 to convert to Hour.\n");
+    printf("Enter 2 to convert to Minute.\n");
+    printf("Enter 3 to convert to second.\n");
+    printf("Enter 99 to go back.\n");
+    scanf("%d", &towhichT);
+    
+}
+
+void hour()
+{
+    printf("Enter 1 to convert to day.\n");
+    printf("Enter 2 to convert to Minute.\n");
+    printf("Enter 3 to convert to second.\n");
+    printf("Enter 99 to go back.\n");
+    scanf("%d", &towhichT);
+    
+}
+
+void min()
+{
+    printf("Enter 1 to convert to day.\n");
+    printf("Enter 2 to convert to hour.\n");
+    printf("Enter 3 to convert to second.\n");
+    printf("Enter 99 to go back.\n");
+    scanf("%d", &towhichT);
+    
+}
+
+void sec()
+{
+    printf("Enter 1 to convert to day.\n");
+    printf("Enter 2 to convert to hour.\n");
+    printf("Enter 3 to convert to minute.\n");
+    printf("Enter 99 to go back.\n");
+    scanf("%d", &towhichT);
+    
 }
 
 void nep()
@@ -140,7 +196,7 @@ int main()
     {
         categorychoose();
 
-        if(category == 't')
+        if(category == 'T')
         {
             system("cls");
             tempchange();
@@ -164,7 +220,7 @@ int main()
             else printf("Please enter the correct choice. \n");
         }
 
-        else if(category == 'c')
+        else if(category == 'C' || category == 'c')
         {
             whichMoneyChoose: 
             system("cls");
@@ -310,7 +366,7 @@ int main()
             
         }
 
-        else if(category == 'm')
+        else if(category == 'M' || category == 'm')
         {
             system("cls");
             masschange();
@@ -318,7 +374,7 @@ int main()
             {
                 printf("Please enter the Kg amount: \n");
                 scanf("%f",&userinpKg);
-                KgTogm = userinpKg * 1000;
+                KgTogm = userinpKg * formass[1];
                 printf("Gram: %f\n\n",KgTogm);
             }   
 
@@ -326,7 +382,7 @@ int main()
             {
                 printf("Please enter the gm amount: \n");
                 scanf("%f",&userinpgm);
-                gmToKg = userinpgm * 0.001;
+                gmToKg = userinpgm * formass[2];
                 printf("Kilogram: %f\n\n",gmToKg);
             }  
 
@@ -334,7 +390,7 @@ int main()
             {
                 printf("Please enter the Kg amount: \n");
                 scanf("%f",&userinpKg);
-                KgToP = userinpKg * 2.2;
+                KgToP = userinpKg * formass[3];
                 printf("Pound: %f\n\n",KgToP);
             }  
 
@@ -342,7 +398,7 @@ int main()
             {
                 printf("Please enter the Pound amount: \n");
                 scanf("%f",&userinpP);
-                PTOKg = userinpP * 0.4536;
+                PTOKg = userinpP * formass[4];
                 printf("Kilogram: %f\n\n",PTOKg);
             }
 
@@ -350,7 +406,7 @@ int main()
             {
                 printf("Please enter the Pound amount: \n");
                 scanf("%f",&userinpP);
-                PToGm = userinpP * 453.592;
+                PToGm = userinpP * formass[5];
                 printf("Gram: %f\n\n",PToGm);
             }  
 
@@ -358,35 +414,35 @@ int main()
             {
                 printf("Please enter the gm amount: \n");
                 scanf("%f",&userinpgm);
-                gmToP = userinpgm * 0.0022046;
-                printf("Kilogram: %f\n\n",gmToP);
+                gmToP = userinpgm * formass[6];
+                printf("Pound: %f\n\n",gmToP);
             } 
             else if(massChoice == 7)
             {
                 printf("Please enter the Kg amount: \n");
                 scanf("%f",&userinpKg);
-                KgToT = userinpKg / 1000;
+                KgToT = userinpKg / formass[1];
                 printf("Ton: %f\n\n",KgToT);
             }  
             else if(massChoice == 8)
             {
                 printf("Please enter the Ton amount: \n");
                 scanf("%f",&userinpTon);
-                TonToKg = userinpTon * 1000;
+                TonToKg = userinpTon * formass[1];
                 printf("Kilogram: %f\n\n",TonToKg);
             }  
             else if(massChoice == 9)
             {
                 printf("Please enter the Pound amount: \n");
                 scanf("%f",&userinpP);
-                PToTon = userinpP * 0.4536;
+                PToTon = userinpP * 0.0004536;
                 printf("Ton: %f\n\n",PToTon);
             }  
             else if(massChoice == 10)
             {
                 printf("Please enter the Ton amount: \n");
                 scanf("%f",&userinpTon);
-                TonToP = userinpTon / 0.4536;
+                TonToP = userinpTon * 2204.623;
                 printf("Pound: %f\n\n",TonToP);
             }  
             else if(massChoice == 99){goto start;}
@@ -395,7 +451,153 @@ int main()
             else printf("Please enter the correct choice. \n");      
 
         }
-        else if(category == 'x')
+
+        else if(category == 't')
+        {
+            whichTimeChoose: 
+            system("cls");
+            whichtime();
+            if(TimeChoice == 1)
+            {
+                system("cls");
+                day();
+                if(towhichT == 1){
+                    
+                    printf("Please enter number of days: \n");
+                    scanf("%f",&userinpday);
+                    daytohr = userinpday * 24;
+                    printf("Hours: %f\n\n", daytohr);
+                
+                }
+
+                else if(towhichT == 2)
+                {
+                    printf("Please enter number of days: \n");
+                    scanf("%f",&userinpday);
+                    daytomin = userinpday * 1440;
+                    printf("Minutes: %f\n\n", daytomin);
+                }
+
+                else if(towhichT == 3)
+                {
+                    printf("Please enter number of days: \n");
+                    scanf("%f",&userinpday);
+                    daytosec = userinpday * 86400;
+                    printf("Seconds: %f\n\n", daytosec);
+                }
+
+                else if(towhichT == 99){goto whichTimeChoose;}
+
+                else printf("Please enter correct choice. \n");
+            }
+
+            else if(TimeChoice == 2)
+            {
+                system("cls");
+                hour();
+                if(towhichT == 1){
+                    
+                    printf("Please enter number Hours: \n");
+                    scanf("%f",&userinphr);
+                    hrtoday = userinphr / 24;
+                    printf("Day: %f\n\n", hrtoday);
+                
+                }
+
+                else if(towhichT == 2)
+                {
+                    printf("Please enter number Hours: \n");
+                    scanf("%f",&userinphr);
+                    hrtomin = userinphr * 60;
+                    printf("Minutes: %f\n\n", hrtomin);
+                }
+
+                else if(towhichT == 3)
+                {
+                    printf("Please enter number Hours: \n");
+                    scanf("%f",&userinphr);
+                    hrtosec = userinphr * 60 * 60;
+                    printf("Seconds: %f\n\n", hrtosec);
+                }
+
+                else if(towhichT == 99){goto whichTimeChoose;}
+
+                else printf("Please enter correct choice. \n");
+            
+            }
+
+            else if(TimeChoice == 3)
+            {
+                system("cls");
+                min();
+                if(towhichT == 1){
+                    
+                    printf("Please enter number of minutes: \n");
+                    scanf("%f",&userinpmin);
+                    mintoday = userinpmin / 1440;
+                    printf("Days: %f\n\n", mintoday);
+                
+                }
+
+                else if(towhichT == 2)
+                {
+                    printf("Please enter number of minutes: \n");
+                    scanf("%f",&userinpmin);
+                    mintohr = userinpmin / 60;
+                    printf("Hours: %f\n\n", mintohr);
+                }
+
+                else if(towhichT == 3)
+                {
+                    printf("Please enter number of minutes: \n");
+                    scanf("%f",&userinpmin);
+                    mintosec = userinpmin * 60;
+                    printf("Seconds: %f\n\n", mintosec);
+                }
+                else if(towhichT == 99){goto whichTimeChoose;}
+
+                else printf("Please enter correct choice. \n");
+            
+            }
+            else if(TimeChoice == 4)
+            {
+                system("cls");
+                sec();
+                if(towhichT == 1){
+                    
+                    printf("Please enter number of seconds: \n");
+                    scanf("%f",&userinpsec);
+                    sectoday = userinpsec / 86400;
+                    printf("Days: %f\n\n", sectoday);
+                
+                }
+
+                else if(towhichT == 2)
+                {
+                    printf("Please enter number of seconds: \n");
+                    scanf("%f",&userinpsec);
+                    sectohr = userinpsec / 3600;
+                    printf("Hours: %f\n\n", sectohr);
+                }
+
+                else if(towhichT == 3)
+                {
+                    printf("Please enter number of seconds: \n");
+                    scanf("%f",&userinpsec);
+                    sectomin = userinpsec  / 60;
+                    printf("Minutes: %f\n\n", sectomin);
+                }
+                else if(towhichT == 99){goto whichTimeChoose;}
+
+                else printf("Please enter correct choice. \n");
+            
+            }
+            else if(TimeChoice == 99){goto start;}
+
+
+            
+        }
+        else if(category == 'X' || category == 'x')
         {
             system("cls");
             printf("!!!THANK YOU COME BACK AGAIN ANYTIME!!!");
