@@ -3,6 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifdef _WIN32
+    #include <stdlib.h>
+    #define CLEAR_COMMAND "cls"
+#else
+    #include <unistd.h>
+    #define CLEAR_COMMAND "clear"
+#endif
+
 char category; //category of the conversion choice
 int tempChoice;
 int currencyChoice;
@@ -47,6 +55,12 @@ float TonToKg;
 float userinpday, userinphr, userinpmin, userinpsec;
 float daytohr, daytomin, daytosec, hrtoday, hrtomin, hrtosec, mintoday, mintohr, mintosec, sectoday, sectohr,sectomin;
 float formass[8] = {0,1000,0.001,2.2,0.4536,453.592,0.0022046};
+
+void clear()
+{
+    system(CLEAR_COMMAND);
+}
+
 void categorychoose()
 {
     printf("HERE IS A LIST OF CONVERSION YOU CAN CHOOSE FROM\n");
@@ -190,7 +204,7 @@ void eu()
 int main()
 {
     start:
-    system("cls");
+    clear();
     printf("WELCOME TO UNIT CONVERTER!!!\n");
     while(1 == 1)
     {
@@ -198,7 +212,7 @@ int main()
 
         if(category == 'T')
         {
-            system("cls");
+            clear();
             tempchange();
             if(tempChoice == 1)
             {
@@ -223,11 +237,11 @@ int main()
         else if(category == 'C' || category == 'c')
         {
             whichMoneyChoose: 
-            system("cls");
+            clear();
             whichmoney();
             if(currencyChoice == 1)
             {
-                system("cls");
+                clear();
                 nep();
                 if(towhich == 1){
                     
@@ -261,7 +275,7 @@ int main()
 
             else if(currencyChoice == 2)
             {
-                system("cls");
+                clear();
                 ind();
                 if(towhich == 1){
                     
@@ -296,7 +310,7 @@ int main()
 
             else if(currencyChoice == 3)
             {
-                system("cls");
+                clear();
                 usa();
                 if(towhich == 1){
                     
@@ -329,7 +343,7 @@ int main()
             }
             else if(currencyChoice == 4)
             {
-                system("cls");
+                clear();
                 usa();
                 if(towhich == 1){
                     
@@ -368,7 +382,7 @@ int main()
 
         else if(category == 'M' || category == 'm')
         {
-            system("cls");
+            clear();
             masschange();
             if(massChoice == 1)
             {
@@ -455,11 +469,11 @@ int main()
         else if(category == 't')
         {
             whichTimeChoose: 
-            system("cls");
+            clear();
             whichtime();
             if(TimeChoice == 1)
             {
-                system("cls");
+                clear();
                 day();
                 if(towhichT == 1){
                     
@@ -493,7 +507,7 @@ int main()
 
             else if(TimeChoice == 2)
             {
-                system("cls");
+                clear();
                 hour();
                 if(towhichT == 1){
                     
@@ -528,7 +542,7 @@ int main()
 
             else if(TimeChoice == 3)
             {
-                system("cls");
+                clear();
                 min();
                 if(towhichT == 1){
                     
@@ -561,7 +575,7 @@ int main()
             }
             else if(TimeChoice == 4)
             {
-                system("cls");
+                clear();
                 sec();
                 if(towhichT == 1){
                     
@@ -599,7 +613,7 @@ int main()
         }
         else if(category == 'X' || category == 'x')
         {
-            system("cls");
+            clear();
             printf("!!!THANK YOU COME BACK AGAIN ANYTIME!!!");
             return 0;
         }
