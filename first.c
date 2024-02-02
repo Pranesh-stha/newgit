@@ -16,10 +16,10 @@ int tempChoice;
 int currencyChoice;
 int TimeChoice;
 int massChoice;
-int userinF; //farenheit input
-int userinC; //celcius input
-int farenToCel;
-int celToFaren;
+float userinF; //farenheit input
+float userinC; //celcius input
+float farenToCel;
+float celToFaren;
 int towhich; //to convert to which currency
 int towhichT; //to convert to which time
 float userinputNrs; //nepali rupeess input
@@ -70,8 +70,21 @@ void categorychoose()
     scanf(" %c", &category);
 }
 
+void fileextract(char *string)//string
+{
+    FILE* tempchange;
+    tempchange = fopen(string,"r");
+    char buf[500];
+    fgets(buf,500,tempchange);
+    printf("%s",buf);
+    fclose(tempchange);
+
+}
+
+
 void tempchange()
 {
+    fileextract("first.txt");
     printf("Welcome to Temperature Unit Converter! \n");
     printf("Here is a list of conversations to choose from: \n");
     printf("Enter 1 for Fahrenheit to Celsius. \n");
@@ -208,26 +221,35 @@ int main()
     printf("WELCOME TO UNIT CONVERTER!!!\n");
     while(1 == 1)
     {
+        FILE* valuestore;
+        valuestore = fopen("first.txt","a");
         categorychoose();
 
         if(category == 'T')
         {
+            
             clear();
             tempchange();
             if(tempChoice == 1)
             {
                 printf("Please enter the Fahrenheit degree: \n");
-                scanf("%d",&userinF);
+                scanf("%f",&userinF);
                 farenToCel =  ((userinF-32) * (5.0/9.0));
-                printf("Celcius: %d\n\n",farenToCel);
+                printf("Celcius: %f\n\n",farenToCel);
+                fprintf(valuestore,"\nCelcius : %f",farenToCel);
+                
+                fclose(valuestore);
             }
 
             else if(tempChoice == 2)
             {
                 printf("Please enter the Celcius degree: \n");
-                scanf("%d",&userinC);
+                scanf("%f",&userinC);
                 celToFaren = ((9.0/5.0)*userinC + 32);
-                printf("Fahrenheit: %d\n\n",celToFaren);
+                printf("Fahrenheit: %f\n\n",celToFaren);
+                fprintf(valuestore,"\nfarenhiet : %f",celToFaren);
+                
+                fclose(valuestore);
             }
             else if(tempChoice == 99){goto start;}
 
@@ -249,6 +271,9 @@ int main()
                     scanf("%f",&userinputNrs);
                     NrsToUsd = userinputNrs * 0.0075;
                     printf("USD: %f\n\n", NrsToUsd);
+                    fprintf(valuestore,"\nUSD: %f",NrsToUsd);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -257,7 +282,10 @@ int main()
                     printf("Please enter the Nrs amount: \n");
                     scanf("%f",&userinputNrs);
                     NrsToEuro = userinputNrs * 0.0069;
-                    printf("USD: %f\n\n", NrsToEuro);
+                    printf("Euro: %f\n\n", NrsToEuro);
+                    fprintf(valuestore,"\n Euro: %f",NrsToEuro);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhich == 3)
@@ -265,7 +293,10 @@ int main()
                     printf("Please enter the Nrs amount: \n");
                     scanf("%f",&userinputNrs);
                     NrsToINR = userinputNrs * 0.63;
-                    printf("USD: %f\n\n", NrsToINR);
+                    printf("INR: %f\n\n", NrsToINR);
+                    fprintf(valuestore,"\n INR: %f",NrsToINR);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhich == 99){goto whichMoneyChoose;}
@@ -283,6 +314,9 @@ int main()
                     scanf("%f",&userinputINR);
                     INRtoUSD = userinputINR * 0.012;
                     printf("USD: %f\n\n", INRtoUSD);
+                    fprintf(valuestore,"\n USD: %f",INRtoUSD);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -292,6 +326,9 @@ int main()
                     scanf("%f",&userinputINR);
                     INRToEuro = userinputINR * 0.011073;
                     printf("Euro: %f\n\n", INRToEuro);
+                    fprintf(valuestore,"\n Euro: %f",INRToEuro);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhich == 3)
@@ -300,6 +337,9 @@ int main()
                     scanf("%f",&userinputINR);
                     INRtoNrs = userinputINR * 1.600832;
                     printf("Nrs: %f\n\n", INRtoNrs);
+                    fprintf(valuestore,"\n Nrs: %f",INRtoNrs);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhich == 99){goto whichMoneyChoose;}
@@ -318,6 +358,9 @@ int main()
                     scanf("%f",&userinputUSD);
                     USDToNrs = userinputUSD / 0.0075;
                     printf("Nrs: %f\n\n", USDToNrs);
+                    fprintf(valuestore,"\n Nrs: %f",USDToNrs);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -327,14 +370,20 @@ int main()
                     scanf("%f",&userinputUSD);
                     USDToEuro = userinputUSD * 0.92;
                     printf("Euro: %f\n\n", USDToEuro);
+                    fprintf(valuestore,"\n Euro: %f",USDToEuro);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhich == 3)
                 {
                     printf("Please enter the USD amount: \n");
                     scanf("%f",&userinputUSD);
-                    USDToNrs = userinputUSD * 83.14;
-                    printf("Nrs: %f\n\n", USDToINR);
+                    USDToINR = userinputUSD * 83.14;
+                    printf("INR: %f\n\n", USDToINR);
+                    fprintf(valuestore,"\n INR: %f",USDToINR);
+                
+                    fclose(valuestore);
                 }
                 else if(towhich == 99){goto whichMoneyChoose;}
 
@@ -351,6 +400,9 @@ int main()
                     scanf("%f",&userinputEuro);
                     EuroToUSD = userinputEuro / 0.92;
                     printf("USD: %f\n\n", EuroToUSD);
+                    fprintf(valuestore,"\n USD: %f",EuroToUSD);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -360,6 +412,9 @@ int main()
                     scanf("%f",&userinputEuro);
                     EuroToNrs = userinputEuro / 0.0069;
                     printf("Nrs: %f\n\n", EuroToNrs);
+                    fprintf(valuestore,"\n Nrs: %f",EuroToNrs);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhich == 3)
@@ -368,6 +423,9 @@ int main()
                     scanf("%f",&userinputEuro);
                     EuroToINR = userinputEuro  / 0.011073;
                     printf("INR: %f\n\n", EuroToINR);
+                    fprintf(valuestore,"\n INR: %f",EuroToINR);
+                
+                    fclose(valuestore);
                 }
                 else if(towhich == 99){goto whichMoneyChoose;}
 
@@ -390,6 +448,9 @@ int main()
                 scanf("%f",&userinpKg);
                 KgTogm = userinpKg * formass[1];
                 printf("Gram: %f\n\n",KgTogm);
+                fprintf(valuestore,"\n Gram: %f",KgTogm);
+                
+                fclose(valuestore);
             }   
 
             else if(massChoice == 2)
@@ -398,6 +459,9 @@ int main()
                 scanf("%f",&userinpgm);
                 gmToKg = userinpgm * formass[2];
                 printf("Kilogram: %f\n\n",gmToKg);
+                fprintf(valuestore,"\n Kilogram: %f",gmToKg);
+                
+                fclose(valuestore);
             }  
 
             else if(massChoice == 3)
@@ -406,6 +470,9 @@ int main()
                 scanf("%f",&userinpKg);
                 KgToP = userinpKg * formass[3];
                 printf("Pound: %f\n\n",KgToP);
+                fprintf(valuestore,"\n Pound: %f",KgToP);
+                
+                fclose(valuestore);
             }  
 
             else if(massChoice == 4)
@@ -414,6 +481,9 @@ int main()
                 scanf("%f",&userinpP);
                 PTOKg = userinpP * formass[4];
                 printf("Kilogram: %f\n\n",PTOKg);
+                fprintf(valuestore,"\n Kilogram: %f",PTOKg);
+                
+                fclose(valuestore);
             }
 
             else if(massChoice == 5)
@@ -422,6 +492,9 @@ int main()
                 scanf("%f",&userinpP);
                 PToGm = userinpP * formass[5];
                 printf("Gram: %f\n\n",PToGm);
+                fprintf(valuestore,"\n Gram: %f",PToGm);
+                
+                fclose(valuestore);
             }  
 
             else if(massChoice == 6)
@@ -430,6 +503,9 @@ int main()
                 scanf("%f",&userinpgm);
                 gmToP = userinpgm * formass[6];
                 printf("Pound: %f\n\n",gmToP);
+                fprintf(valuestore,"\n Pound: %f",gmToP);
+                
+                fclose(valuestore);
             } 
             else if(massChoice == 7)
             {
@@ -437,6 +513,9 @@ int main()
                 scanf("%f",&userinpKg);
                 KgToT = userinpKg / formass[1];
                 printf("Ton: %f\n\n",KgToT);
+                fprintf(valuestore,"\n Ton: %f",KgToT);
+                
+                fclose(valuestore);
             }  
             else if(massChoice == 8)
             {
@@ -444,6 +523,9 @@ int main()
                 scanf("%f",&userinpTon);
                 TonToKg = userinpTon * formass[1];
                 printf("Kilogram: %f\n\n",TonToKg);
+                fprintf(valuestore,"\n Kilogram: %f",TonToKg);
+                
+                fclose(valuestore);
             }  
             else if(massChoice == 9)
             {
@@ -451,6 +533,9 @@ int main()
                 scanf("%f",&userinpP);
                 PToTon = userinpP * 0.0004536;
                 printf("Ton: %f\n\n",PToTon);
+                fprintf(valuestore,"\n Ton: %f",PToTon);
+                
+                fclose(valuestore);
             }  
             else if(massChoice == 10)
             {
@@ -458,6 +543,9 @@ int main()
                 scanf("%f",&userinpTon);
                 TonToP = userinpTon * 2204.623;
                 printf("Pound: %f\n\n",TonToP);
+                fprintf(valuestore,"\n Pound: %f",TonToP);
+                
+                fclose(valuestore);
             }  
             else if(massChoice == 99){goto start;}
 
@@ -481,6 +569,9 @@ int main()
                     scanf("%f",&userinpday);
                     daytohr = userinpday * 24;
                     printf("Hours: %f\n\n", daytohr);
+                    fprintf(valuestore,"\n Hours: %f",daytohr);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -490,6 +581,9 @@ int main()
                     scanf("%f",&userinpday);
                     daytomin = userinpday * 1440;
                     printf("Minutes: %f\n\n", daytomin);
+                    fprintf(valuestore,"\n Minutes: %f",daytomin);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhichT == 3)
@@ -498,6 +592,9 @@ int main()
                     scanf("%f",&userinpday);
                     daytosec = userinpday * 86400;
                     printf("Seconds: %f\n\n", daytosec);
+                    fprintf(valuestore,"\n Seconds: %f",daytosec);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhichT == 99){goto whichTimeChoose;}
@@ -515,6 +612,9 @@ int main()
                     scanf("%f",&userinphr);
                     hrtoday = userinphr / 24;
                     printf("Day: %f\n\n", hrtoday);
+                    fprintf(valuestore,"\n Day: %f",hrtoday);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -524,6 +624,9 @@ int main()
                     scanf("%f",&userinphr);
                     hrtomin = userinphr * 60;
                     printf("Minutes: %f\n\n", hrtomin);
+                    fprintf(valuestore,"\n Minutes: %f",hrtomin);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhichT == 3)
@@ -532,6 +635,9 @@ int main()
                     scanf("%f",&userinphr);
                     hrtosec = userinphr * 60 * 60;
                     printf("Seconds: %f\n\n", hrtosec);
+                    fprintf(valuestore,"\n Seconds: %f",hrtosec);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhichT == 99){goto whichTimeChoose;}
@@ -550,6 +656,9 @@ int main()
                     scanf("%f",&userinpmin);
                     mintoday = userinpmin / 1440;
                     printf("Days: %f\n\n", mintoday);
+                    fprintf(valuestore,"\n Days: %f",mintoday);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -559,6 +668,9 @@ int main()
                     scanf("%f",&userinpmin);
                     mintohr = userinpmin / 60;
                     printf("Hours: %f\n\n", mintohr);
+                    fprintf(valuestore,"\n Hours: %f",mintohr);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhichT == 3)
@@ -567,6 +679,9 @@ int main()
                     scanf("%f",&userinpmin);
                     mintosec = userinpmin * 60;
                     printf("Seconds: %f\n\n", mintosec);
+                    fprintf(valuestore,"\n Seconds: %f",mintosec);
+                
+                    fclose(valuestore);
                 }
                 else if(towhichT == 99){goto whichTimeChoose;}
 
@@ -583,6 +698,9 @@ int main()
                     scanf("%f",&userinpsec);
                     sectoday = userinpsec / 86400;
                     printf("Days: %f\n\n", sectoday);
+                    fprintf(valuestore,"\n Days: %f",sectoday);
+                
+                    fclose(valuestore);
                 
                 }
 
@@ -592,6 +710,9 @@ int main()
                     scanf("%f",&userinpsec);
                     sectohr = userinpsec / 3600;
                     printf("Hours: %f\n\n", sectohr);
+                    fprintf(valuestore,"\n Hours: %f",sectohr);
+                
+                    fclose(valuestore);
                 }
 
                 else if(towhichT == 3)
@@ -600,6 +721,9 @@ int main()
                     scanf("%f",&userinpsec);
                     sectomin = userinpsec  / 60;
                     printf("Minutes: %f\n\n", sectomin);
+                    fprintf(valuestore,"\n Minutes: %f",sectomin);
+                
+                    fclose(valuestore);
                 }
                 else if(towhichT == 99){goto whichTimeChoose;}
 
@@ -616,6 +740,11 @@ int main()
             clear();
             printf("!!!THANK YOU COME BACK AGAIN ANYTIME!!!");
             return 0;
+        }
+        else{
+            
+            goto start;
+
         }
     }
 
