@@ -70,21 +70,8 @@ void categorychoose()
     scanf(" %c", &category);
 }
 
-void fileextract(char *string)//string
-{
-    FILE* tempchange;
-    tempchange = fopen(string,"r");
-    char buf[500];
-    fgets(buf,500,tempchange);
-    printf("%s",buf);
-    fclose(tempchange);
-
-}
-
-
 void tempchange()
 {
-    fileextract("first.txt");
     printf("Welcome to Temperature Unit Converter! \n");
     printf("Here is a list of conversations to choose from: \n");
     printf("Enter 1 for Fahrenheit to Celsius. \n");
@@ -249,7 +236,7 @@ int main()
                 printf("Fahrenheit: %f\n\n",celToFaren);
                 fprintf(valuestore,"\nfarenhiet : %f",celToFaren);
                 
-                fclose(valuestore);
+                fclose(valuestore);TimeChoice;
             }
             else if(tempChoice == 99){goto start;}
 

@@ -1,7 +1,9 @@
 
-Celcius : 13.333333
-farenhiet : 192.199997
- Kilogram: 8.995001
- Ton: 0.078000
-USD: 1.005000
- Minutes: 1224792704.000000
+
+Celcius : 10.000000
+ USD: 6.521739
+ Seconds: 172800.000000
+farenhiet : 176.000000
+ Seconds: 259200.000000
+ Pound: 7570675.500000
+ Minutes: 7200.000000
